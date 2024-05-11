@@ -1,0 +1,113 @@
+.dataTable {
+	--table-color: #31886e;
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+	.container {
+		box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+			rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+		width: 1000px;
+		padding: 1rem;
+		font-size: 18px;
+		.tableHead {
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: 1em;
+			input {
+				height: 30px;
+			}
+			select {
+				height: 35px;
+			}
+		}
+		#dataTable {
+			border-collapse: collapse;
+			width: 100%;
+			#thead,
+			#tfoot {
+				text-transform: capitalize;
+				background-color: var(--table-color);
+				color: #fff;
+			}
+
+			#thead {
+				th {
+					span {
+						opacity: 0.3;
+						cursor: pointer;
+						font-size: 22px;
+					}
+					span:hover {
+						opacity: 1;
+					}
+				}
+				.sorbBy {
+					span {
+						opacity: 1;
+					}
+				}
+			}
+
+			tbody {
+				overflow-x: auto;
+				opacity: 0.8;
+				tr:nth-child(odd) {
+					background-color: #f2f2f2;
+				}
+				tr:hover {
+					background-color: #dddddd37;
+				}
+			}
+			td,
+			th {
+				text-wrap: wrap;
+				text-align: center;
+				padding: 0.8rem;
+				border: 1px solid rgba(0, 0, 0, 0.121);
+			}
+		}
+	}
+
+	.pagingButton {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-top: 1rem;
+		ul {
+			list-style: none;
+			display: flex;
+			justify-content: end;
+			flex-wrap: wrap;
+
+			gap: 5px;
+			.active button {
+				background-color: var(--table-color);
+				color: #fff;
+			}
+			li {
+				button {
+					width: 40px;
+					height: 30px;
+					border: none;
+					cursor: pointer;
+				}
+
+				button:hover {
+					background-color: var(--table-color);
+					color: #fff;
+				}
+				button:active {
+					background-color: var(--table-color);
+					color: white;
+				}
+
+				button:disabled {
+					background-color: rgba(128, 128, 128, 0.427);
+					color: black;
+					cursor: text;
+				}
+			}
+		}
+	}
+}

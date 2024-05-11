@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script
+			src="datatable.js"
+			type="module"></script>
+		<link
+			rel="stylesheet"
+			href="datatable.css" />
+	</head>
+	<body>
+		<article class="dataTable">
+			<section class="container">
+				<section class="tableHead">
+					<section>
+						<select
+							name="pagination"
+							id="pagination">
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+						<span> entries per page</span>
+					</section>
+					<input
+						type="text"
+						id="filterData"
+						placeholder="Search..." />
+				</section>
+				<table id="dataTable">
+					<thead id="thead"></thead>
+					<tbody id="tbody"></tbody>
+					<tfoot id="tfoot"></tfoot>
+				</table>
+				<section class="pagingButton">
+					<span id="showing"></span>
+					<ul id="paginationList"></ul>
+				</section>
+			</section>
+		</article>
+	</body>
+</html>
