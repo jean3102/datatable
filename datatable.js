@@ -174,12 +174,16 @@ filterData.addEventListener('input', () => {
 	});
 
 	saveFiltered = searchData;
-
 	const paginatedData = pagination();
-
+	
 	clearPagination();
-	generateTable(paginatedData);
-	generateButtonPagination();
+
+	if (searchData.length > 0) {
+		generateTable(paginatedData);
+		generateButtonPagination();
+	} else {
+		generateTable([]);
+	}
 });
 
 const clearPagination = () => {
@@ -291,6 +295,7 @@ const generateButtonPagination = () => {
 };
 
 const generateTable = (body, generateHead = false) => {
+	console.log(`🚀 ------------ body:`, body);
 	if (body) {
 		if (generateHead) {
 			generateHeader(savedData.head);
