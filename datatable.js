@@ -37,15 +37,15 @@ const pagination = () => {
 
 		let result = data.slice(startIndex, endIndex);
 
-		showingEntries(startIndex, data);
+		showingEntries(startIndex,endIndex, data);
 		if (sortBy) return sorbByElement(result);
 
 		return result;
 	}
 };
 
-const showingEntries = (startIndex, data) => {
-	showing.innerHTML = `Showing ${startIndex + 1} to ${data.length} of ${
+const showingEntries = (startIndex, endIndex,data) => {
+	showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
 		savedData.body.length
 	} entries`;
 };
@@ -59,7 +59,6 @@ const sorbByElement = (result) => {
 		}
 	});
 };
-
 
 const handleSort = () => {
 	const thElements = thead.querySelectorAll('th');
@@ -187,7 +186,6 @@ const clearPagination = () => {
 	}
 };
 
-
 const generateHeader = (head) => {
 	let headRow = '<tr>';
 	let footRow = '<tr>';
@@ -208,11 +206,21 @@ const generateBody = (head, body) => {
 	let bodyRow = '';
 
 	if (body.length > 0) {
+		let startIndex = (currentPage - 1) * itemPerPage + 1;
+
 		for (const key in body) {
 			const object = body[key];
 
 			bodyRow += '<tr>';
-			bodyRow += `<td>${parseInt(key) + 1}</th>`;
+			if (currentPage > 1) {
+			
+				bodyRow += `<td>${
+					parseInt(startIndex) + parseInt(key)
+				}</th>`;
+			} else {
+				bodyRow += `<td>${parseInt(key) + 1}</th>`;
+			}
+			
 			for (const iterator of head) {
 				bodyRow += `<td>${object[iterator]}</th>`;
 			}
@@ -239,8 +247,6 @@ entriesPagination.addEventListener('change', () => {
 		generateButtonPagination();
 	}
 });
-
-
 
 const generateButtonPagination = () => {
 	let element = Math.ceil(savedData.body.length / itemPerPage);
@@ -282,7 +288,6 @@ const generateButtonPagination = () => {
 	const li = document.querySelector('#paginationList li:nth-child(2)');
 	li.classList.add('active');
 };
-
 
 const generateTable = (body, generateHead = false) => {
 	if (body) {
