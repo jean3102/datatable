@@ -37,17 +37,21 @@ const pagination = () => {
 
 		let result = data.slice(startIndex, endIndex);
 
-		showingEntries(startIndex,endIndex, data);
+		showingEntries(startIndex, endIndex, data);
 		if (sortBy) return sorbByElement(result);
 
 		return result;
 	}
 };
 
-const showingEntries = (startIndex, endIndex,data) => {
+const showingEntries = (startIndex, endIndex, data) => {
 	showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
-		savedData.body.length
-	} entries`;
+		data.length
+	} entries ${
+		saveFiltered.length > 0
+			? `(filtered from ${savedData.body.length} total entries)`
+			: ''
+	}`;
 };
 
 const sorbByElement = (result) => {
@@ -67,7 +71,7 @@ const handleSort = () => {
 			clearSorbSelector();
 
 			const value = this.textContent.split('^');
-			th.classList.add('sorbBy');
+			th.classList.to('sorbBy');
 			sortBy = value[0].trim();
 			const paginatedData = pagination();
 			if (paginatedData.length > 0) generateTable(paginatedData);
@@ -213,14 +217,11 @@ const generateBody = (head, body) => {
 
 			bodyRow += '<tr>';
 			if (currentPage > 1) {
-			
-				bodyRow += `<td>${
-					parseInt(startIndex) + parseInt(key)
-				}</th>`;
+				bodyRow += `<td>${parseInt(startIndex) + parseInt(key)}</th>`;
 			} else {
 				bodyRow += `<td>${parseInt(key) + 1}</th>`;
 			}
-			
+
 			for (const iterator of head) {
 				bodyRow += `<td>${object[iterator]}</th>`;
 			}
