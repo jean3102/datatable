@@ -7,7 +7,7 @@ const tfoot = document.getElementById('tfoot');
 const showing = document.getElementById('showing');
 const tableName = 'dataTable';
 let savedData = [];
-let saveFiltered = [];
+let saveFiltered = null;
 let currentPage = 1;
 let itemPerPage = entriesPagination.value;
 let sortBy = null;
@@ -23,7 +23,8 @@ const pagination = () => {
 	const item = parseInt(itemPerPage);
 	let data = savedData.body;
 
-	if (saveFiltered.length > 0) {
+	console.log(`🚀 ------------ saveFiltered:`, saveFiltered);
+	if (saveFiltered) {
 		data = saveFiltered;
 	}
 
@@ -46,13 +47,18 @@ const pagination = () => {
 };
 
 const showingEntries = (startIndex, endIndex, data) => {
-	showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
-		data.length
-	} entries ${
-		saveFiltered.length > 0
-			? `(filtered from ${savedData.body.length} total entries)`
-			: ''
-	}`;
+	console.log(`🚀 ------------ data:`, data);
+	if (data.length > 0) {
+		showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
+			data.length
+		} entries ${
+			saveFiltered
+				? `(filtered from ${savedData.body.length} total entries)`
+				: ''
+		}`;
+	} else {
+		showing.innerHTML = `Showing 0 to 0 of ${savedData.body.length}`;
+	}
 };
 
 const sorbByElement = (result) => {
@@ -204,11 +210,11 @@ const generateBody = (head, body) => {
 			const object = body[key];
 
 			bodyRow += '<tr>';
-			if (currentPage > 1) {
-				bodyRow += `<td>${parseInt(startIndex) + parseInt(key)}</th>`;
-			} else {
-				bodyRow += `<td>${parseInt(key) + 1}</th>`;
-			}
+			// if (currentPage > 1) {
+			// 	bodyRow += `<td>${parseInt(startIndex) + parseInt(key)}</th>`;
+			// } else {
+			// }
+			bodyRow += `<td>${parseInt(key) + 1}</th>`;
 
 			for (const iterator of head) {
 				bodyRow += `<td>${object[iterator]}</th>`;
@@ -239,7 +245,7 @@ entriesPagination.addEventListener('change', () => {
 
 const generateButtonPagination = () => {
 	let element = Math.ceil(savedData.body.length / itemPerPage);
-	if (saveFiltered.length > 0) {
+	if (saveFiltered) {
 		element = Math.ceil(saveFiltered.length / itemPerPage);
 	}
 
