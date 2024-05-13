@@ -23,7 +23,6 @@ const pagination = () => {
 	const item = parseInt(itemPerPage);
 	let data = savedData.body;
 
-	console.log(`🚀 ------------ saveFiltered:`, saveFiltered);
 	if (saveFiltered) {
 		data = saveFiltered;
 	}
@@ -47,7 +46,6 @@ const pagination = () => {
 };
 
 const showingEntries = (startIndex, endIndex, data) => {
-	console.log(`🚀 ------------ data:`, data);
 	if (data.length > 0) {
 		showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
 			data.length
