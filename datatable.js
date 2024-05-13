@@ -10,7 +10,7 @@ let savedData = [];
 let saveFiltered = [];
 let currentPage = 1;
 let itemPerPage = entriesPagination.value;
-let sortBy = '';
+let sortBy = null;
 
 const getUsers = async () => {
 	const response = await fetch('https://jsonplaceholder.typicode.com/todos');
@@ -40,6 +40,7 @@ const pagination = () => {
 		showingEntries(startIndex, endIndex, data);
 		if (sortBy) return sorbByElement(result);
 
+		console.log('************************');
 		return result;
 	}
 };
@@ -56,11 +57,12 @@ const showingEntries = (startIndex, endIndex, data) => {
 
 const sorbByElement = (result) => {
 	return result.sort((a, b) => {
-		{
-			if (a[sortBy] < b[sortBy]) return -1;
-			if (a[sortBy] > b[sortBy]) return 1;
-			return 0;
-		}
+		a = String(a[sortBy]);
+		b = String(b[sortBy]);
+
+		if (a < b) return -1;
+		if (a > b) return 1;
+		return 0;
 	});
 };
 
@@ -68,11 +70,16 @@ const handleSort = () => {
 	const thElements = thead.querySelectorAll('th');
 	thElements.forEach(function (th) {
 		th.onclick = function () {
-			clearSorbSelector();
-
 			const value = this.textContent.split('^');
-			th.classList.to('sorbBy');
-			sortBy = value[0].trim();
+			if (th.classList.value) {
+				th.classList.remove('sorbBy');
+				sortBy = null;
+			} else {
+				clearSorbSelector();
+				th.classList.add('sorbBy');
+				sortBy = value[0].trim();
+			}
+
 			const paginatedData = pagination();
 			if (paginatedData.length > 0) generateTable(paginatedData);
 		};
@@ -175,7 +182,7 @@ filterData.addEventListener('input', () => {
 
 	saveFiltered = searchData;
 	const paginatedData = pagination();
-	
+
 	clearPagination();
 
 	if (searchData.length > 0) {
@@ -295,7 +302,6 @@ const generateButtonPagination = () => {
 };
 
 const generateTable = (body, generateHead = false) => {
-	console.log(`🚀 ------------ body:`, body);
 	if (body) {
 		if (generateHead) {
 			generateHeader(savedData.head);
