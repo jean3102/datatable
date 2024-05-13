@@ -65,6 +65,7 @@ const sorbByElement = (result) => {
 		b = String(b[sortBy]);
 
 		if (a < b) return -1;
+		
 		if (a > b) return 1;
 		return 0;
 	});
