@@ -40,7 +40,6 @@ const pagination = () => {
 		showingEntries(startIndex, endIndex, data);
 		if (sortBy) return sorbByElement(result);
 
-		console.log('************************');
 		return result;
 	}
 };

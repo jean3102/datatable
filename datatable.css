@@ -103,11 +103,22 @@
 				}
 
 				button:disabled {
-					background-color: rgba(128, 128, 128, 0.427);
+					background-color: rgb(128 128 128 / 28%);
 					color: black;
 					cursor: text;
 				}
 			}
+		}
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.pagingButton {
+		flex-direction: column;
+		justify-content: center;
+		ul {
+			justify-content: center;
+			padding: 0;
 		}
 	}
 }
