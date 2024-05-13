@@ -94,35 +94,12 @@ const clearSorbSelector = () => {
 };
 
 const handleNext = () => {
-	const values = getValueFromLocalStore(tableName);
-	if (currentPage > 0 && savedData.body) {
-		currentPage += 1;
-		const paginatedData = pagination();
-		if (paginatedData.length > 0) {
-			generateTable(paginatedData);
-			clearPagination();
-			generateTable(paginatedData);
-			generateButtonPagination();
-		} else {
-			currentPage -= 1;
-		}
-	}
-	handleActiveColor();
+	let element = Math.ceil(savedData.body.length / itemPerPage);
+	if (currentPage < element) handlePage(currentPage + 1);
 };
 
 const handlePrevious = () => {
-	if (currentPage > 1 && savedData.body) {
-		currentPage -= 1;
-
-		const paginatedData = pagination();
-		if (paginatedData.length > 0) {
-			generateTable(paginatedData);
-			clearPagination();
-			generateTable(paginatedData);
-			generateButtonPagination();
-		}
-	}
-	handleActiveColor();
+	if (currentPage > 1) handlePage(currentPage - 1);
 };
 
 const handlePage = (value) => {
