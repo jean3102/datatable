@@ -14,7 +14,7 @@ To use the DataTable, simply follow the instructions below:
 ### copy the following structure
 
 ```
-    <article class="mainContainer">
+  	<article class="mainContainer">
 			<section class="container">
 				<section class="tableHead">
 					<section>
@@ -43,7 +43,7 @@ To use the DataTable, simply follow the instructions below:
 					<ul id="paginationList"></ul>
 				</section>
 			</section>
-		</article>
+	</article>
 ```
 
 ## then export the datatable function
@@ -54,6 +54,8 @@ This function receives two parameters, the first are the columns and the second 
 
 
 ```
+import { dataTable } from './datatable.js';
+
 const data = await getData();
 const head = ['key1', 'key2', 'key3', 'etc....'];
 
