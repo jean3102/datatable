@@ -8,7 +8,7 @@ const getUsers = async () => {
 
 const printData = async () => {
 	const data = await getUsers();
-	const head = ['firstName', 'email', 'age', 'phone'];
+	const head = ['firstName', 'email','phone'];
 	dataTable(head, data);
 };
 

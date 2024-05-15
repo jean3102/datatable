@@ -11,8 +11,6 @@ let currentPage = 1;
 let itemPerPage = entriesPagination.value;
 let sortBy = null;
 
-
-
 const pagination = () => {
 	const page = parseInt(currentPage);
 	const item = parseInt(itemPerPage);
@@ -31,6 +29,10 @@ const pagination = () => {
 			endIndex = item + startIndex;
 		}
 
+		if (endIndex > data.length) {
+			endIndex = data.length;
+		}
+
 		let result = data.slice(startIndex, endIndex);
 
 		showingEntries(startIndex, endIndex, data);
@@ -45,7 +47,7 @@ const showingEntries = (startIndex, endIndex, data) => {
 		showing.innerHTML = `Showing ${startIndex + 1} to ${endIndex} of ${
 			data.length
 		} entries ${
-			saveFiltered
+			filterData.value.length > 0
 				? `(filtered from ${savedData.body.length} total entries)`
 				: ''
 		}`;
@@ -159,10 +161,11 @@ filterData.addEventListener('input', () => {
 
 	saveFiltered = searchData;
 	const paginatedData = pagination();
-
+	
 	clearPagination();
-
+	
 	if (searchData.length > 0) {
+		currentPage = 1;
 		generateTable(paginatedData);
 		generateButtonPagination();
 	} else {
@@ -199,12 +202,12 @@ const generateBody = (head, body) => {
 
 	if (body.length > 0) {
 		let startIndex = (currentPage - 1) * itemPerPage + 1;
-
+	
 		for (const key in body) {
 			const object = body[key];
 
 			bodyRow += '<tr>';
-			bodyRow += `<td>${parseInt(key) + 1}</th>`;
+			bodyRow += `<td>${parseInt(key) + startIndex}</th>`;
 
 			for (const iterator of head) {
 				bodyRow += `<td>${object[iterator]}</th>`;
@@ -295,4 +298,3 @@ export const dataTable = (head, data) => {
 		generateTable(data);
 	}
 };
-
