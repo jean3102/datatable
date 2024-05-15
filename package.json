@@ -1,12 +1,12 @@
 {
-	"name": "datatable",
+	"name": "datatable-javascript",
 	"version": "1.0.0",
-	"description": "created with Vanilla javascript",
-	"main": "index.js",
+	"description": "table to display paginated data with Vanilla javascript",
+	"main": "datatable.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "jean Carlos Luciano",
 	"license": "ISC"
 }

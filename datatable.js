@@ -5,18 +5,13 @@ const tbody = document.getElementById('tbody');
 const thead = document.getElementById('thead');
 const tfoot = document.getElementById('tfoot');
 const showing = document.getElementById('showing');
-const tableName = 'dataTable';
 let savedData = [];
 let saveFiltered = null;
 let currentPage = 1;
 let itemPerPage = entriesPagination.value;
 let sortBy = null;
 
-const getUsers = async () => {
-	const response = await fetch('https://dummyjson.com/users');
-	const data = await response.json();
-	return data.users;
-};
+
 
 const pagination = () => {
 	const page = parseInt(currentPage);
@@ -65,7 +60,7 @@ const sorbByElement = (result) => {
 		b = String(b[sortBy]);
 
 		if (a < b) return -1;
-		
+
 		if (a > b) return 1;
 		return 0;
 	});
@@ -209,10 +204,6 @@ const generateBody = (head, body) => {
 			const object = body[key];
 
 			bodyRow += '<tr>';
-			// if (currentPage > 1) {
-			// 	bodyRow += `<td>${parseInt(startIndex) + parseInt(key)}</th>`;
-			// } else {
-			// }
 			bodyRow += `<td>${parseInt(key) + 1}</th>`;
 
 			for (const iterator of head) {
@@ -292,7 +283,7 @@ const generateTable = (body, generateHead = false) => {
 	}
 };
 
-const dataTable = (head, data) => {
+export const dataTable = (head, data) => {
 	if (data.length > 0) {
 		savedData = { head: head, body: data };
 		const paginatedData = pagination();
@@ -305,10 +296,3 @@ const dataTable = (head, data) => {
 	}
 };
 
-const printData = async () => {
-	const data = await getUsers();
-	const head = ['firstName', 'email', 'age', 'phone'];
-	dataTable(head, data);
-};
-
-printData();
