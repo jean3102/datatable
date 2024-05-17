@@ -2,7 +2,10 @@
 
 This DataTable is a tool to handle tabular data efficiently in javascript. Whether you're working with small data sets or big data, DataTable offers a comprehensive set of features to seamlessly manipulate, analyze, and visualize your data.
 
-##Characteristics
+#### Demo: [DataTable](https://datatable-javascript.netlify.app)
+
+
+## Characteristics
 
 - **Data manipulation:** Perform operations such as filtering and sorting data with ease.
 
@@ -11,7 +14,7 @@ This DataTable is a tool to handle tabular data efficiently in javascript. Wheth
 To use the DataTable, simply follow the instructions below:
 
 
-### copy the following structure
+### Copy the following structure
 
 ```
   	<article class="mainContainer">
@@ -46,7 +49,7 @@ To use the DataTable, simply follow the instructions below:
 	</article>
 ```
 
-## then export the datatable function
+## Then export the datatable function
 This function receives two parameters, the first are the columns and the second is the object array.
 
 
@@ -61,7 +64,3 @@ const head = ['key1', 'key2', 'key3', 'etc....'];
 
 dataTable(head, data);
 ```
-
-
-
-
